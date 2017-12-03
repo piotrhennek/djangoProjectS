@@ -16,13 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-import accounts.views
-from posts import views
+from accounts import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^posts/', include('posts.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^$', views.home, name="home"),
-    #url(r'^$', accounts.views.home, name="home"),
 ]

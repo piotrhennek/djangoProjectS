@@ -3,8 +3,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
+def home(request):
+    if request.user.is_authenticated():
+        return loginview(request)
+    else:
+        return loginview(request)
+
+
 def signup(request):
-    if request.method == 'POST':
+    if request.method == 'POST': 
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.get(username=request.POST['username'])

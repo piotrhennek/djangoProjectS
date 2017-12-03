@@ -1,0 +1,98 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: url(../images/bann2.png) repeat-x left top;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #fff;
+}
+
+img.center
+{
+	border: 0;
+	outline: none;
+	margin: 0 0 0 25px;
+}
+span
+{
+	color: red;
+}
+p.center
+{
+	text-align: center;
+}
+a
+{
+	color: #717171;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #323232;
+}
+#box
+{
+	width: 442px;
+	margin: 220px auto auto 60em;
+	font-weight: bold;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+#box_top
+{
+	background: url('../images/box_top.png') no-repeat;
+	width: 443px;
+	height: 70px;
+	display: block;
+	margin: 0;
+}
+#box_bottom
+{
+	background: url('../images/box_bottom.png') no-repeat;
+	width: 443px;
+	height: 87px;
+	display: block;
+	margin: 0;
+}
+#box_content
+{
+	
+	width: 394px;
+	display: block;
+	margin: 0 0 0 10px;
+	padding: 0 10px 0 19px;
+	overflow: hidden;
+}
+#box_content .left
+{
+	width: 340px;
+	float: left;
+	display: block;
+}
+#box_content .right
+{
+	width: 140px;
+	float: left;
+	display: block;
+	margin: 20px 0 0 20px;
+}
+
+input.text
+{
+	font-size: 11px;
+	border: 1px solid #d4d4d4;
+	border-radius: 3px;	
+	padding: 3px;
+	*padding: 0 3px -10px 3px;
+	margin:  0px 0 5px 0;
+	background: #f6f6f6;
+	*height: 20px;
+	height: 27px;
+	width: 320px;
+	color: #545454;
+}
+input.submit
+{
+	margin: 7px 0 0 146px;
+}

@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Post
 from django.contrib.auth.models import User
-# Create your views here.
 
 @login_required
 def create(request):
@@ -24,10 +23,12 @@ def create(request):
     else:
         return render(request, 'posts/create.html')
 
+@login_required
 def home(request):
     posts = Post.objects.order_by('-votes_total')
     return render(request, 'posts/home.html', {'posts':posts})
 
+@login_required
 def upvote(request, pk):
     if request.method == 'POST':
         post = Post.objects.get(pk=pk)
@@ -35,6 +36,7 @@ def upvote(request, pk):
         post.save()
         return redirect('home')
 
+@login_required
 def downvote(request, pk):
     if request.method == 'POST':
         post = Post.objects.get(pk=pk)
@@ -42,6 +44,7 @@ def downvote(request, pk):
         post.save()
         return redirect('home')
 
+@login_required
 def userposts(request, fk):
     posts = Post.objects.filter(author__id=fk).order_by('-votes_total')
     author = User.objects.get(pk=fk)
