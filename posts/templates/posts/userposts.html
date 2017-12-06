@@ -20,7 +20,7 @@
 
 <form id="downvote{{ post.id }}" method="POST" action="{% url 'posts:downvote' post.id %}">
  {% csrf_token %}
- <input type="hidden">
+ <input type="hidden"`>
  </form>
 
 {% endfor %}

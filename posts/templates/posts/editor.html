@@ -9,23 +9,6 @@
 <br />
 {% endif %}
 
-<!-- <nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-	    <div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav">
-				<li><a href="./index.php?str=1"><img src="./images/leaf_white.png"></a></li>
-				<li class="active"><a href="./index.php?str=2&clean=1">Edytor</a></li>
-				<li ><a href="./index.php?str=3">Szablony</a></li>
-				<li ><a href="./index.php?str=4">Dokumenty</a></li>
-				<li><a href="./index.php?wyloguj=1">Wyloguj</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-		        <li><a href="./index.php?str=5">admin</a></li>
-		    </ul>
-	    </div>
-	</div>
-</nav>-->
-
     <div class="container-fluid text-center">
 		<div class="col-sm-12">
 			<div class="alert alert-success">
@@ -34,7 +17,7 @@
 		</div>
 	</div>
 <!-- <form action="./index.php?str=2&insert_temp=1" method="post"> -->
-<form method="POST" action="{% url 'posts:create' %}">
+<form method="POST" action="{% url 'posts:editor' %}">
   {% csrf_token %}
 
   <div class="row content">
@@ -42,7 +25,7 @@
         Nazwa:<br/><input type="text" name="name" value=""><br/><br/>
         Opis:<br/><input type="text" name="description" value=""><br/><br/>
         Tag:<br/><input type="text" name="tags" value=""><br/><br/>
-        Publiczny:<input type="checkbox" name="publiczny" value="1" ><br/><br/>
+        Publiczny:<input type="checkbox" name="access" value="1" ><br/><br/>
         <input type="submit" name="add" alt="Dodaj szablon" value="Dodaj Szablon" >
     </div>
     <div class="col-sm-10 text-left">
