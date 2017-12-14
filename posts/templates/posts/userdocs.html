@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All Docs by {{ author.username }}</h1>
+<br/>
+
+
+<table>
+    <tr class="naglowek">
+        <td class="top"><a href="./index.php?str=3">Lp.</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=name&amp;s=dsc&amp;v=1">Nazwa</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=description&amp;s=dsc&amp;v=1">Opis</a></td>
+        <td class="top"><a href="./index.php?str=3">Wersja</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=date(date_creation)&amp;s=dsc">Data utworzenia</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=date(date_creation)&amp;s=dsc">Data ost. mod.</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=access&amp;s=dsc&amp;v=1">Dostęp</a></td>
+        <td>Edycja</td>
+    </tr>
+    {% for temp in userDocs.all %}
+    <tr>
+        <td class="lp"><span class="lp">{{ temp.version }}</span></td>
+        <td class="name">
+        <a href="javascript:show('80name')" id="button80name">
+            {{ temp.name }}
+        </a>
+            <div id="modal80name">
+                <div id="heading">
+                    {{ temp.description }}
+                </div>
+                <div id="content">
+                    <form action="./index.php?str=4&amp;toDoc=80" method="post">
+                        <p style="text-align: center;">Po wypełnieniu kliknij poniżej, by szablon został wypełniony.</p>
+
+                        <table class="form"><tbody><tr><td>prywatny: </td><td><input type="text" name="prywatny"></td></tr></tbody></table>
+                        <input type="submit" class="button green close" value="Wypełnij">
+
+                        <a href="" class="button red close" style="text-align: center;">Odrzuć</a>
+
+                        <p><span class="guide"></span></p>
+                    </form>
+                </div>
+            </div>
+        </td> <!-- if ver == 1 then udostepnij do edycji, inaczej grayout w stylach -->
+        <td class="opis">{{ temp.description }}</td>
+        <td style="width: 50px;">{{ temp.version }}</td>
+        <td style="width: 100px;">{{ temp.date_creation }}<!-- <a href=\"data.php?id=""\" target=\"_top\"><img src='/static/images/add.png' class='add' title='dodaj wylinkę'/> --></td>
+        <td style="width: 100px;" class="info">{{ temp.date_creation }}</td>
+        <td style="width: 100px;">
+            {% ifequal temp.access 0 %}
+                <img src="/static/images/private.png" class="tab"></td>
+            {% else %}
+                <img src="/static/images/public.png" class="tab"></td>
+            {% endifequal %}
+        <td class="ex" style="width: 60px;">
+
+            <!-- EDIT -->
+
+            <!-- <img src='/static/images/add.png' class='add' title='dodaj ptasznika tego gatunku' /> -->
+            <a href="./index.php?str=2&amp;edit=80" target="_top"><img src="/static/images/edit.png" class="add" title="edytuj">
+            <!-- <a href="./index.php?str=3&delete=80" target="_top"><img src='/static/images/delete.png' class='add' title='usuń' /> -->
+
+            <!-- DELETE -->
+
+            </a>
+            <a href="javascript:show('80a')" id="button80a"><img src="/static/images/delete.png" class="add" title="usuń"></a>
+            <div id="modal80a">
+                <div id="heading">
+                    Jesteś pewien, że chcesz usunąć szablon?
+                </div>
+                <div id="content">
+                    <p style="text-align: center;">Klikając 'Tak' Twój dokument zostanie usunięty z bazy</p>
+                    <a href="./index.php?str=3&amp;delete=80" class="button green close"><img src="/static/images/tick.png">Tak</a>
+                    <a href="" class="button red close"><img src="/static/images/cross.png">Nie</a>
+                    <p><span class="guide"></span></p>
+                </div>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<table>
+    <tr class="naglowek">
+        <td class="top"><a href="./index.php?str=3">Lp.</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=name&amp;s=dsc&amp;v=1">Nazwa</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=description&amp;s=dsc&amp;v=1">Opis</a></td>
+        <td class="top"><a href="./index.php?str=3">Wersja</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=date(date_creation)&amp;s=dsc">Data utworzenia</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=date(date_creation)&amp;s=dsc">Data ost. mod.</a></td>
+        <td class="top"><a href="./index.php?str=3&amp;sort=access&amp;s=dsc&amp;v=1">Dostęp</a></td>
+        <td>Edycja</td>
+    </tr>
+    {% for temp in publicDocs.all %}
+    <tr>
+        <td class="lp"><span class="lp">{{ temp.version }}</span></td>
+        <td class="name">
+        <a href="javascript:show('80name')" id="button80name">
+            {{ temp.name }}
+        </a>
+            <div id="modal80name">
+                <div id="heading">
+                    {{ temp.description }}
+                </div>
+                <div id="content">
+                    <form action="./index.php?str=4&amp;toDoc=80" method="post">
+                        <p style="text-align: center;">Po wypełnieniu kliknij poniżej, by szablon został wypełniony.</p>
+
+                        <table class="form"><tbody><tr><td>prywatny: </td><td><input type="text" name="prywatny"></td></tr></tbody></table>
+                        <input type="submit" class="button green close" value="Wypełnij">
+
+                        <a href="" class="button red close" style="text-align: center;">Odrzuć</a>
+
+                        <p><span class="guide"></span></p>
+                    </form>
+                </div>
+            </div>
+        </td> <!-- if ver == 1 then udostepnij do edycji, inaczej grayout w stylach -->
+        <td class="opis">{{ temp.description }}</td>
+        <td style="width: 50px;">{{ temp.version }}</td>
+        <td style="width: 100px;">{{ temp.date_creation }}<!-- <a href=\"data.php?id=""\" target=\"_top\"><img src='/static/images/add.png' class='add' title='dodaj wylinkę'/> --></td>
+        <td style="width: 100px;" class="info">{{ temp.date_creation }}</td>
+        <td style="width: 100px;">
+            {% ifequal temp.access 0 %}
+                <img src="/static/images/private.png" class="tab"></td>
+            {% else %}
+                <img src="/static/images/public.png" class="tab"></td>
+            {% endifequal %}
+        <td class="ex" style="width: 60px;">
+
+            <!-- EDIT -->
+
+            <!-- <img src='/static/images/add.png' class='add' title='dodaj ptasznika tego gatunku' /> -->
+            <a href="./index.php?str=2&amp;edit=80" target="_top"><img src="/static/images/edit.png" class="add" title="edytuj">
+            <!-- <a href="./index.php?str=3&delete=80" target="_top"><img src='/static/images/delete.png' class='add' title='usuń' /> -->
+
+            <!-- DELETE -->
+
+            </a>
+            <a href="javascript:show('80a')" id="button80a"><img src="/static/images/delete.png" class="add" title="usuń"></a>
+            <div id="modal80a">
+                <div id="heading">
+                    Jesteś pewien, że chcesz usunąć szablon?
+                </div>
+                <div id="content">
+                    <p style="text-align: center;">Klikając 'Tak' Twój dokument zostanie usunięty z bazy</p>
+                    <a href="./index.php?str=3&amp;delete=80" class="button green close"><img src="/static/images/tick.png">Tak</a>
+                    <a href="" class="button red close"><img src="/static/images/cross.png">Nie</a>
+                    <p><span class="guide"></span></p>
+                </div>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

@@ -19,10 +19,10 @@ def editor(request):
     else:
         return render(request, 'posts/editor.html')
 
-@login_required
-def home(request):
-    posts = Template.objects.order_by('-votes_total')
-    return render(request, 'posts/home.html', {'posts':posts})
+# @login_required
+# def home(request):
+#   posts = Template.objects.order_by('-votes_total')
+#   return render(request, 'posts/home.html', {'posts':posts})
 
 # @login_required
 # def upvote(request, pk):
@@ -36,15 +36,16 @@ def home(request):
 # def downvote(request, pk):
 #     if request.method == 'POST':
 #         post = Template.objects.get(pk=pk)
-#         post.votes_total -= 1
+#         post.v+otes_total -= 1
 #         post.save()
 #         return redirect('home')
 
 @login_required
-def templates(request, fk):
-    posts = Template.objects.filter(author__id=fk).order_by('-votes_total')
-    author = User.objects.get(pk=fk)
-    return render(request, 'posts/userposts.html', {'posts':posts, 'author':author})
+def templates(request):
+    docs = Template.objects.filter(user_id=request.user.id).order_by('-date_creation')
+    public = Template.objects.filter(access=1).order_by('-date_creation')
+    author = User.objects.get(username=request.user)
+    return render(request, 'posts/userdocs.html', {'userDocs':docs, 'publicDocs':public, 'author':author})
 
 def insertTemplate(request, template):
     template.name = request.POST['name']
@@ -53,8 +54,14 @@ def insertTemplate(request, template):
     template.access = request.POST.get('access', False)
     template.date_creation = timezone.datetime.now()
     template.user = request.user
+
+    parents = Template.objects.filter(name=request.POST['name']).order_by('-version')
+    if parents:
+        template.version = parents[0].version + 1
+
     # template.version = request.POST['title']
     template.save()
+    templates(request)
 
 def insertTags(request, template):
     words = request.POST['tags'].split(",")
