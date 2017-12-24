@@ -32,7 +32,7 @@ def loginview(request):
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST['next'])
-            return redirect('home')
+            return redirect('/posts/templates')
         else:
             return render(request, 'accounts/login.html', {'error':'The Username and Password didn\'t match'})
     else:

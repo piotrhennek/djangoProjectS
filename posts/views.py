@@ -11,7 +11,7 @@ def editor(request):
             template = Template()
             insertTemplate(request, template)
             insertTags(request, template)
-            return redirect('home')
+            return redirect('/posts/templates/')
         else:
             #return render(request, 'posts/create.html',
                           #{'error': 'ERROR: You must include a title and a URL to create a post.'})
@@ -42,6 +42,12 @@ def editor(request):
 
 @login_required
 def templates(request):
+    docs = Template.objects.filter(user_id=request.user.id).order_by('-date_creation')
+    public = Template.objects.filter(access=1).order_by('-date_creation')
+    author = User.objects.get(username=request.user)
+    return render(request, 'posts/usertemplates.html', {'userDocs':docs, 'publicDocs':public, 'author':author})
+
+def documents(request):
     docs = Template.objects.filter(user_id=request.user.id).order_by('-date_creation')
     public = Template.objects.filter(access=1).order_by('-date_creation')
     author = User.objects.get(username=request.user)
